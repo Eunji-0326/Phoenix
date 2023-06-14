@@ -117,9 +117,9 @@
         subnet_mask: 255.255.255.0
       state: present
     with_items:
-    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.11.11' }}" }
-    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.11.12' }}" }
-    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.11.13' }}" } 
+    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.11.14' }}" }
+    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.11.15' }}" }
+    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.11.16' }}" } 
     delegate_to: localhost
   
   - name: Add vMotion vmkernel port with vMotion TCP/IP stack
@@ -139,9 +139,9 @@
       state: present
       enable_vmotion: true
     with_items:
-    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.12.11' }}" }
-    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.12.12' }}" }
-    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.12.13' }}" } 
+    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.12.14' }}" }
+    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.12.15' }}" }
+    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.12.16' }}" } 
     delegate_to: localhost
 
   - name: Add vmkernel port to Distributed Switch vsan
@@ -160,7 +160,7 @@
       state: present
       enable_vsan: true
     with_items:
-    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.100.11' }}" }
-    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.100.12' }}" }
-    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.100.13' }}" } 
+    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}",ip: "{{ '10.10.100.14' }}" }
+    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}",ip: "{{ '10.10.100.15' }}" }
+    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}",ip: "{{ '10.10.100.16' }}" } 
     delegate_to: localhost
