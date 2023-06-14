@@ -32,6 +32,6 @@
           unit_number: 0
           state: present
           type: iso
-          iso_path: "[iSCSI-0] contentlib-8275da38-ceee-408c-ac73-2a44139ee60c/a3d842ce-446e-43c6-a17b-c488f6fdcdfc/ubuntu-20.04.4-desktop-amd64_5e4e474d-f282-4533-8d41-8e39496621b0.iso"
+          iso_path: "[nfs] ubuntu-20.04.4-desktop-amd64.iso"
       delegate_to: localhost
       register: deploy
