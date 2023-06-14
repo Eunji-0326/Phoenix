@@ -56,16 +56,16 @@
     - {hostname: "{{ 'sa-esxi-06.vclass.local' }}" }
     delegate_to: localhost
 
-  - name: Add VMFS datastore
-    community.vmware.vmware_datastore_cluster_manager :
-      hostname: '{{ my_vcenter_hostname }}'
-      username: '{{ my_vcenter_username }}'
-      password: '{{ my_vcenter_password }}'
-      datacenter: TEST
-      datastore: S11
-      type: vmfs
-      state: present
-    delegate_to: localhost
+  # - name: Add VMFS datastore
+  #   community.vmware.vmware_datastore_cluster_manager :
+  #     hostname: '{{ my_vcenter_hostname }}'
+  #     username: '{{ my_vcenter_username }}'
+  #     password: '{{ my_vcenter_password }}'
+  #     datacenter: TEST
+  #     datastore: S11
+  #     type: vmfs
+  #     state: present
+  #   delegate_to: localhost
 
 
   # - name: Remove a dynamic target from iSCSI config of ESXi
