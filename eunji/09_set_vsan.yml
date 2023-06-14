@@ -1,0 +1,20 @@
+# https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_cluster_vsan_module.html#ansible-collections-community-vmware-vmware-cluster-vsan-module
+
+---
+- hosts: localhost
+  vars_files: ./vars.yml
+
+  tasks:
+  - name: Enable vSAN and automatic rebalancing
+    community.vmware.vmware_cluster_vsan:
+      hostname: '{{ my_vcenter_hostname }}'
+      username: '{{ my_vcenter_username }}'
+      password: '{{ my_vcenter_password }}'
+      validate_certs: 'false'
+      datacenter_name: TEST
+      cluster_name: S11
+      enable: true
+      advanced_options:
+        automatic_rebalance: true
+      vsan_auto_claim_storage: true
+    delegate_to: localhost
