@@ -20,6 +20,16 @@
         name: "{{ student_ID + '-test-DC' }}"
         state: poweredon
         esxi_hostname: "{{ esxi_hostname }}"  # 200.200.200.246
+        disk:
+        - size_gb: 90
+          type: thin
+          datastore: "{{ datastore_name }}"
+        - size_gb: 100
+          type: thin
+          datastore: "{{ datastore_name }}"
+        hardware:
+          memory_mb: 4096
+          num_cpus: 2
         networks:
         - name: "{{ student_ID + '-Mgmt' }}"  # PHX-Mgmt 포트 그룹에 연결
           ip: 20.20.20.22
