@@ -12,7 +12,6 @@ network_config=$(cat <<EOL
 network:
  version: 2
  renderer: NetworkManager
- ethernets:
  ens33:
   dhcp4: no
   addresses:
