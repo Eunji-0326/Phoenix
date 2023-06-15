@@ -15,8 +15,8 @@
 $disknum = 3 # or 2
 $driveletter = Y
 $targetname = "iscsi-test"
-$diskpath = "X:\iSCSIDisk\test-LUN0.vhdx"
-$disksize = 10GB
+$diskpath = $driveletter + ":\iSCSIDisk\test-LUN0.vhdx"
+$disksize = 100GB
 
 # Set disk online
 Set-disk -Number -IsOffline $false
