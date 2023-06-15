@@ -48,9 +48,9 @@
         vm_id_type: vm_name
         vm_username: 'phoenix'
         vm_password: 'VMware1!'
-        vm_shell: /usr/bin/sudo
+        vm_shell: /usr/bin/bash
         vm_shell_args: 
-          "sh /home/phoenix/set_setting.sh"
+          "/home/phoenix/set_setting.sh"
         wait_for_process: True
         timeout: 60
       delegate_to: localhost
