@@ -16,7 +16,7 @@ network:
   ens192:
    dhcp4: no
    addresses:
-    - 10.10.13.2
+    - 10.10.13.2/24
    gateway4: 10.10.13.1
    nameservers:
     addresses: [10.10.10.10]
