@@ -10,7 +10,7 @@
 $driveletter = "Z"
 $targetname = "iscsi-test"
 $diskpath = $driveletter + ":\iSCSIDisk\test-LUN0.vhdx"
-$disksize = "100GB"
+$disksize = 100GB
 
 # create iSCSI Target
 New-IscsiServerTarget -TargetName $targetname -InitiatorId @("IPAddress:10.10.11.14","IPAddress:10.10.11.15","IPAddress:10.10.11.16")
@@ -25,4 +25,4 @@ Add-IscsiVirtualDiskTargetMapping -TargetName $targetname -Path $diskpath
 Get-IscsiServerTarget -TargetName $targetname 
 
 # restart service
-Restart-Service -Name $targetname
+Restart-Service -Name WinTarget
