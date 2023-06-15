@@ -39,7 +39,7 @@ sudo apt install net-tools
 sudo apt install -y ca-certificates curl gnupg lsb-release
 
 # vim package install
-sudo apt-get install vim
+sudo apt install -y vim
 
 # iptables install
 echo 'iptables-persistent iptables-persistent/autosave_v4 boolean true' | sudo debconf-set-selections
@@ -50,6 +50,7 @@ sudo apt install -y iptables-persistent
 hostnamectl set-hostname k8s-master
 
 # add hosts file 
+sudo su -
 sudo echo "10.10.13.2 k8s-master" >> /etc/hosts
 sudo echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
 sudo echo "10.10.13.4 k8s-worker-02" >> /etc/hosts
