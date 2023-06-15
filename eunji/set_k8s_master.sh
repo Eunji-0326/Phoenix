@@ -12,7 +12,7 @@ network_config=$(cat <<EOL
 network:
  version: 2
  renderer: NetworkManager
- ens160:
+ ens192:
   dhcp4: no
   addresses:
    - 10.10.13.2
