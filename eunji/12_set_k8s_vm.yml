@@ -83,7 +83,7 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/rm
-        vm_shell_args: -rf /home/phoenix/set_setting.sh
+        vm_shell_args: -rf /home/phoenix/setting.sh
         wait_for_process: True
       delegate_to: localhost
 
