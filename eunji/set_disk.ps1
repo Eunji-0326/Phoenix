@@ -12,13 +12,13 @@ $driveletter = Z
 Set-disk -Number -IsOffline $false
 
 # initailize disk partitionstyle
-Initialize-Disk -Number $disknum -PartitionStyle mbr
+Initialize-Disk -Number $disknum -PartitionStyle MBR
 
 Initialize-Disk -DiskNumber $disknum -UseMaximunSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel myDrive
-Get-Partition -DiskNumber 1 | Set-Partition -NewDriveLetter $driveletter
+Get-Partition -DiskNumber $disknum | Set-Partition -NewDriveLetter $driveletter
 
 # install iSCSI Target with admin tools
 Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
 
 # restart computer to apply changes
-Restart-Computer -Force 
+#Restart-Computer -Force 
