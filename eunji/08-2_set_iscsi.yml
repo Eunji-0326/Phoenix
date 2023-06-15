@@ -35,8 +35,9 @@
         vm_shell_args: '-command "(c:\\Material\\set_iscsi.ps1)"'
         vm_shell_cwd: 'c:\Users\Administrator'
         wait_for_process: True
-        timeout: 60
+        timeout: 180
       delegate_to: localhost
+      ignore_errors: yes
 
     - name: Delete copied powershell script
       community.vmware.vmware_vm_shell:
