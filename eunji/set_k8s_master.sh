@@ -29,9 +29,6 @@ sudo netplan apply
 sudo systemctl stop unattended-upgrades.service
 sudo apt-get update -y || true
 
-# vmtools install
-sudo apt-get install open-vm-tools -y
-
 # ssh server install
 sudo apt install -y openssh-server
 
