@@ -46,7 +46,7 @@
         validate_certs: 'false'
         vm_id: "k8s-master-x"
         vm_id_type: vm_name
-        vm_username: 'phoenix'
+        vm_username: 'phoenix@k8s-master'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/bash
         vm_shell_args: 
