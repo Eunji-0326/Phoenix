@@ -12,13 +12,14 @@ network_config=$(cat <<EOL
 network:
  version: 2
  renderer: NetworkManager
- ens192:
-  dhcp4: no
-  addresses:
-   - 10.10.13.2
-  gateway4: 10.10.13.1
-  nameservers:
-   addresses: [10.10.10.10]
+ ethernets:
+  ens192:
+   dhcp4: no
+   addresses:
+    - 10.10.13.2
+   gateway4: 10.10.13.1
+   nameservers:
+    addresses: [10.10.10.10]
 EOL
 )
 echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /dev/null
