@@ -52,7 +52,7 @@
         vm_shell_args: 
           "/home/phoenix/setting.sh"
         wait_for_process: True
-        timeout: 60
+        timeout: 120
       delegate_to: localhost
 
     # - name: Execute shell script on ESXi host
