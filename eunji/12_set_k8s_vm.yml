@@ -18,7 +18,7 @@
         vm_password: 'VMware1!'
         copy:
             src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
-            dest: "/tmp/setting.sh"
+            dest: "/home/phoenix/setting.sh"
             overwrite: true
       delegate_to: localhost
 
