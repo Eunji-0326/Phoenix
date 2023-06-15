@@ -6,37 +6,37 @@
   vars_files: ./vars.yml
 
   tasks: 
-    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
-      community.vmware.vmware_guest_file_operation:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
-        vm_id_type: vm_name
-        vm_username: 'phoenix'
-        vm_password: 'VMware1!'
-        copy:
-            src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
-            dest: "/home/phoenix/setting.sh"
-            overwrite: true
-      delegate_to: localhost
+    # - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    #   community.vmware.vmware_guest_file_operation:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
+    #     vm_id_type: vm_name
+    #     vm_username: 'phoenix'
+    #     vm_password: 'VMware1!'
+    #     copy:
+    #         src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
+    #         dest: "/home/phoenix/setting.sh"
+    #         overwrite: true
+    #   delegate_to: localhost
 
-    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
-      community.vmware.vmware_guest_file_operation:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
-        vm_id_type: vm_name
-        vm_username: 'phoenix'
-        vm_password: 'VMware1!'
-        copy:
-            src: "/mnt/c/test/Phoenix/eunji/add_hosts.sh"
-            dest: "/home/phoenix/hosts.sh"
-            overwrite: true
-      delegate_to: localhost
+    # - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    #   community.vmware.vmware_guest_file_operation:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
+    #     vm_id_type: vm_name
+    #     vm_username: 'phoenix'
+    #     vm_password: 'VMware1!'
+    #     copy:
+    #         src: "/mnt/c/test/Phoenix/eunji/add_hosts.sh"
+    #         dest: "/home/phoenix/hosts.sh"
+    #         overwrite: true
+    #   delegate_to: localhost
 
     - name: Execute shell script on ESXi host
       community.vmware.vmware_vm_shell:
