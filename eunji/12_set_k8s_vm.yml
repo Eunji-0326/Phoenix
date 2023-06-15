@@ -12,7 +12,7 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        vm_id: "k8s-master" #가상머신을 이름으로 찾아감
+        vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
         vm_id_type: vm_name
         vm_username: 'phoenix'
         vm_password: 'VMware1!'
@@ -44,7 +44,7 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        vm_id: "k8s-master"
+        vm_id: "k8s-master-x"
         vm_id_type: vm_name
         vm_username: 'phoenix'
         vm_password: 'VMware1!'
@@ -78,11 +78,11 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        vm_id: "k8s-master"
+        vm_id: "k8s-master-x"
         vm_id_type: vm_name
         vm_username: 'root'
         vm_password: 'VMware1!'
-        vm_shell: /bin/rm
+        vm_shell: /usr/bin/rm
         vm_shell_args: -rf /home/phoenix/set_setting.sh
         wait_for_process: True
       delegate_to: localhost
@@ -108,7 +108,7 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        name: "k8s-master"
+        name: "k8s-master-x"
         state: reboot-guest
       delegate_to: localhost
       register: deploy
