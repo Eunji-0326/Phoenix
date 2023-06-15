@@ -21,7 +21,7 @@
             overwrite: true
       delegate_to: localhost
 
-    - name: Run diskls powershell script
+    - name: Run disk powershell script
       community.vmware.vmware_vm_shell:
         hostname: '{{ vcenter_hostname }}'
         username: '{{ vcenter_username }}'
