@@ -10,16 +10,16 @@ echo "Root password changed successfully."
 # set IP address
 network_config=$(cat <<EOL
 network:
-  version: 2
-  renderer: NetworkManager
-  ethernets:
-  ens33:
-	dhcp4: no
-	addresses:
-		- 10.10.13.2
-	gateway4: 10.10.13.1
-	nameservers:
-		addresses: [10.10.10.10]
+ version: 2
+ renderer: NetworkManager
+ ethernets:
+ ens33:
+  dhcp4: no
+  addresses:
+   - 10.10.13.2
+  gateway4: 10.10.13.1
+  nameservers:
+   addresses: [10.10.10.10]
 EOL
 )
 echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /dev/null
@@ -50,7 +50,7 @@ sudo apt-get install -y iptables-persistent
 hostnamectl set-hostname k8s-master
 
 # add hosts file 
-echo "10.10.13.2 k8s-master" >> /etc/hosts
-echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
-echo "10.10.13.4 k8s-worker-02" >> /etc/hosts
-echo "10.10.13.5 k8s-worker-04" >> /etc/hosts
+sudo echo "10.10.13.2 k8s-master" >> /etc/hosts
+sudo echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
+sudo echo "10.10.13.4 k8s-worker-02" >> /etc/hosts
+sudo echo "10.10.13.5 k8s-worker-04" >> /etc/hosts
