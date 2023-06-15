@@ -6,21 +6,21 @@
   vars_files: ./vars.yml
 
   tasks: 
-    # - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
-    #   community.vmware.vmware_guest_file_operation:
-    #     hostname: '{{ my_vcenter_hostname }}'
-    #     username: '{{ my_vcenter_username }}'
-    #     password: '{{ my_vcenter_password }}'
-    #     validate_certs: 'false'
-    #     vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
-    #     vm_id_type: vm_name
-    #     vm_username: 'phoenix'
-    #     vm_password: 'VMware1!'
-    #     copy:
-    #         src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
-    #         dest: "/home/phoenix/setting.sh"
-    #         overwrite: true
-    #   delegate_to: localhost
+    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+      community.vmware.vmware_guest_file_operation:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "k8s-master" #가상머신을 이름으로 찾아감
+        vm_id_type: vm_name
+        vm_username: 'phoenix'
+        vm_password: 'VMware1!'
+        copy:
+            src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
+            dest: "/home/phoenix/setting.sh"
+            overwrite: true
+      delegate_to: localhost
 
     # - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
     #   community.vmware.vmware_guest_file_operation:
@@ -28,7 +28,7 @@
     #     username: '{{ my_vcenter_username }}'
     #     password: '{{ my_vcenter_password }}'
     #     validate_certs: 'false'
-    #     vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
+    #     vm_id: "k8s-master"
     #     vm_id_type: vm_name
     #     vm_username: 'phoenix'
     #     vm_password: 'VMware1!'
@@ -44,33 +44,33 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        vm_id: "k8s-master-x"
+        vm_id: "k8s-master"
         vm_id_type: vm_name
-        vm_username: 'root'
+        vm_username: 'phoenix'
         vm_password: 'VMware1!'
-        vm_shell: /bin/bash
+        vm_shell: /usr/bin/sudo
         vm_shell_args: 
-          "sh /home/phoenix/hosts.sh"
+          "sh /home/phoenix/set_setting.sh"
         wait_for_process: True
         timeout: 60
       delegate_to: localhost
 
-    - name: Execute shell script on ESXi host
-      community.vmware.vmware_vm_shell:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        vm_id: "k8s-master-x"
-        vm_id_type: vm_name
-        vm_username: 'phoenix'
-        vm_password: 'VMware1!'
-        vm_shell: /bin/bash
-        vm_shell_args: 
-          "/home/phoenix/set_setting.sh"
-        wait_for_process: True
-        timeout: 60
-      delegate_to: localhost
+    # - name: Execute shell script on ESXi host
+    #   community.vmware.vmware_vm_shell:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master"
+    #     vm_id_type: vm_name
+    #     vm_username: 'root'
+    #     vm_password: 'VMware1!'
+    #     vm_shell: /bin/bash
+    #     vm_shell_args: 
+    #       "/home/phoenix/hosts.sh"
+    #     wait_for_process: True
+    #     timeout: 60
+    #   delegate_to: localhost
 
     - name: Delete copied shell script #실행한 shell script 삭제
       community.vmware.vmware_vm_shell:
@@ -78,7 +78,7 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        vm_id: "k8s-master-x"
+        vm_id: "k8s-master"
         vm_id_type: vm_name
         vm_username: 'root'
         vm_password: 'VMware1!'
@@ -87,20 +87,20 @@
         wait_for_process: True
       delegate_to: localhost
 
-    - name: Delete copied shell script #실행한 shell script 삭제
-      community.vmware.vmware_vm_shell:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        vm_id: "k8s-master-x"
-        vm_id_type: vm_name
-        vm_username: 'root'
-        vm_password: 'VMware1!'
-        vm_shell: /bin/rm
-        vm_shell_args: -rf /home/phoenix/hosts.sh
-        wait_for_process: True
-      delegate_to: localhost
+    # - name: Delete copied shell script #실행한 shell script 삭제
+    #   community.vmware.vmware_vm_shell:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master"
+    #     vm_id_type: vm_name
+    #     vm_username: 'root'
+    #     vm_password: 'VMware1!'
+    #     vm_shell: /bin/rm
+    #     vm_shell_args: -rf /home/phoenix/hosts.sh
+    #     wait_for_process: True
+    #   delegate_to: localhost
       
     - name: reboot vm
       community.vmware.vmware_guest_powerstate:
@@ -108,7 +108,7 @@
         username: '{{ my_vcenter_username }}'
         password: '{{ my_vcenter_password }}'
         validate_certs: 'false'
-        name: "k8s-master-x"
+        name: "k8s-master"
         state: reboot-guest
       delegate_to: localhost
       register: deploy
