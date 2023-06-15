@@ -22,4 +22,4 @@ Get-Partition -DiskNumber $disknum | Set-Partition -NewDriveLetter $driveletter
 Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
 
 # restart computer to apply changes
-#Restart-Computer -Force 
+Restart-Computer -Force 
