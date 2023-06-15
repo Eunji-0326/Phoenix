@@ -37,6 +37,7 @@
         wait_for_process: True
         timeout: 60
       delegate_to: localhost
+      ignore_errors: yes
 
     - name: Delete copied powershell script
       community.vmware.vmware_vm_shell:
