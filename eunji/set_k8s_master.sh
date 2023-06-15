@@ -36,7 +36,7 @@ sudo apt install -y openssh-server
 sudo apt install net-tools
 
 # package install
-sudo apt-get install -y ca-certificates curl gnupg lsb-release
+sudo apt install -y ca-certificates curl gnupg lsb-release
 
 # vim package install
 sudo apt-get install vim
@@ -44,7 +44,7 @@ sudo apt-get install vim
 # iptables install
 echo 'iptables-persistent iptables-persistent/autosave_v4 boolean true' | sudo debconf-set-selections
 echo 'iptables-persistent iptables-persistent/autosave_v6 boolean false' | sudo debconf-set-selections
-sudo apt-get install -y iptables-persistent
+sudo apt install -y iptables-persistent
 
 # k8s host name change
 hostnamectl set-hostname k8s-master
