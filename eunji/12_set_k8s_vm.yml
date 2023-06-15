@@ -39,6 +39,39 @@
         timeout: 60
       delegate_to: localhost
 
+    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+      community.vmware.vmware_guest_file_operation:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "k8s-master-x" #가상머신을 이름으로 찾아감
+        vm_id_type: vm_name
+        vm_username: 'phoenix'
+        vm_password: 'VMware1!'
+        copy:
+            src: "/mnt/c/test/Phoenix/eunji/add_hosts.sh"
+            dest: "/home/phoenix/hosts.sh"
+            overwrite: true
+      delegate_to: localhost
+
+    - name: Execute shell script on ESXi host
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "k8s-master-x"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /bin/bash
+        vm_shell_args: 
+          "/home/phoenix/hosts.sh"
+        wait_for_process: True
+        timeout: 60
+      delegate_to: localhost
+
     - name: Delete copied shell script #실행한 shell script 삭제
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
@@ -51,6 +84,21 @@
         vm_password: 'VMware1!'
         vm_shell: /bin/rm
         vm_shell_args: -rf /home/phoenix/set_setting.sh
+        wait_for_process: True
+      delegate_to: localhost
+
+    - name: Delete copied shell script #실행한 shell script 삭제
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "k8s-master-x"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /bin/rm
+        vm_shell_args: -rf /home/phoenix/hosts.sh
         wait_for_process: True
       delegate_to: localhost
 
