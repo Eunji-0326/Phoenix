@@ -17,7 +17,7 @@
         datastore: "{{ datastore_name }}"
         folder: '{{ folder_prefix + student_ID }}'
         template: "{{ student_ID + '-Win2022-Template'}}"
-        name: "{{ student_ID + '-test-DC' }}"
+        name: "{{ student_ID + '-DC' }}"
         state: poweredon
         esxi_hostname: "{{ esxi_hostname }}"  # 200.200.200.246
         disk:
