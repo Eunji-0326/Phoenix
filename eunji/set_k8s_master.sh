@@ -13,13 +13,13 @@ network:
   version: 2
   renderer: NetworkManager
   ethernets:
-	ens33:
-  	dhcp4: no
-  	addresses:
-    	- 10.10.13.2
-  	gateway4: 10.10.13.1
-  	nameservers:
-    	addresses: [10.10.10.10]
+  ens33:
+	dhcp4: no
+	addresses:
+		- 10.10.13.2
+	gateway4: 10.10.13.1
+	nameservers:
+		addresses: [10.10.10.10]
 EOL
 )
 echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /dev/null
