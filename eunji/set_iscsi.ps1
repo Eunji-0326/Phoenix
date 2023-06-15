@@ -7,7 +7,7 @@
 # https://learn.microsoft.com/ko-kr/powershell/module/iscsitarget/add-iscsivirtualdisktargetmapping?view=windowsserver2019-ps
 
 
-$driveletter = Z
+$driveletter = "Z"
 $targetname = "iscsi-test"
 $diskpath = $driveletter + ":\iSCSIDisk\test-LUN0.vhdx"
 $disksize = 100GB
