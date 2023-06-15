@@ -26,8 +26,8 @@ echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /de
 sudo netplan apply
 
 # repository update
-sudo systemctl stop unattended-upgrades.service
-sudo apt-get update -y || true
+# sudo systemctl stop unattended-upgrades.service
+sudo apt update -y
 
 # ssh server install
 sudo apt install -y openssh-server
