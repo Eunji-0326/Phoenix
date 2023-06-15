@@ -1,0 +1,66 @@
+## https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_file_operation_module.html#ansible-collections-community-vmware-vmware-guest-file-operation-module 
+## https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vm_shell_module.html
+---
+- hosts: localhost
+  vars_files: ./vars.yml
+
+  tasks: 
+    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+      community.vmware.vmware_guest_file_operation:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: '{{ item.vmname }}' #가상머신을 이름으로 찾아감
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        copy:
+            src: '{{ item.file_name }}'
+            dest: "/tmp/set_network.sh"
+            overwrite: true
+      with_items:
+      - {vmname: "k8s-master",file_name: "/mnt/c/test/Phoenix/eunji/set_k8s_vm.sh" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-05' }}",file_name: "/mnt/c/test/Phoenix/eunji/set_k8s_vm.sh" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-06' }}",file_name: "/mnt/c/test/Phoenix/eunji/set_k8s_vm.sh" }  
+      delegate_to: localhost
+
+    - name: Execute shell script on ESXi host
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: '{{ item.vmname }}'
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /bin/sh
+        vm_shell_args: 
+          "/tmp/set_network.sh"
+        wait_for_process: True
+        timeout: 60
+      with_items:
+      - {vmname: "{{ student_ID + '-SA-ESXi-04' }}" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-05' }}" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-06' }}" }  
+      delegate_to: localhost
+
+    - name: Delete copied shell script #실행한 shell script 삭제
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: '{{ item.vmname }}'
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /bin/rm
+        vm_shell_args: -rf /tmp/set_network.sh
+        wait_for_process: True
+      with_items:
+      - {vmname: "{{ student_ID + '-SA-ESXi-04' }}" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-05' }}" }
+      - {vmname: "{{ student_ID + '-SA-ESXi-06' }}" }  
+      delegate_to: localhost

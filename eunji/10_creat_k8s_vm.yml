@@ -13,14 +13,14 @@
         validate_certs: 'false'
         folder: "/"
         datacenter: TEST
-        name: "k8s-master"
+        name: '{{ item.vmname }}'
         state: poweredon
         guest_id: ubuntu64Guest
         esxi_hostname: "sa-esxi-04.vclass.local"   #"phx-esxi-01.vclass.local"
         disk:
         - size_gb: 16
           type: thick
-          datastore: iSCSI-0
+          datastore: test-iscsi
         hardware:
           memory_mb: 4096
           num_cpus: 2
@@ -33,5 +33,10 @@
           state: present
           type: iso
           iso_path: "[nfs] ubuntu-20.04.4-desktop-amd64.iso"
+      with_items:
+      - {vmname: "k8s-master", hostname: "sa-esxi-04.vclass.local" }
+      - {vmname: "k8s-worker-01", hostname: "sa-esxi-05.vclass.local" }
+      - {vmname: "k8s-worker-02", hostname: "sa-esxi-06.vclass.local" }  
+      - {vmname: "k8s-worker-03", hostname: "sa-esxi-06.vclass.local" }  
       delegate_to: localhost
       register: deploy
