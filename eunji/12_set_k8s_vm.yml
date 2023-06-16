@@ -53,14 +53,3 @@
         vm_shell_args: -rf /home/phoenix/setting.sh
         wait_for_process: True
       delegate_to: localhost
-
-    - name: reboot vm
-      community.vmware.vmware_guest_powerstate:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        name: "k8s-master"
-        state: reboot-guest
-      delegate_to: localhost
-      register: deploy
