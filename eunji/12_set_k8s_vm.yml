@@ -59,9 +59,9 @@
         vm_shell_args: '{{ item.cmd }}'
         wait_for_process: True
         timeout: 120
-        with_items:
-        - {cmd: "/home/phoenix/setting.sh" }
-        - {cmd: "/home/phoenix/install_docker.sh" }
+      with_items:
+      - {cmd: "/home/phoenix/setting.sh" }
+      - {cmd: "/home/phoenix/install_docker.sh" }
       delegate_to: localhost
 
     - name: Delete copied shell script #실행한 shell script 삭제
@@ -77,8 +77,8 @@
         vm_shell: /usr/bin/rm
         vm_shell_args: '{{ item.cmd }}'
         wait_for_process: True
-        with_items:
-        - {cmd: "-rf /home/phoenix/setting.sh" }
-        - {cmd: "-rf /home/phoenix/set_net.yml" }
-        - {cmd: "/home/phoenix/install_docker.sh" }
+      with_items:
+      - {cmd: "-rf /home/phoenix/setting.sh" }
+      - {cmd: "-rf /home/phoenix/set_net.yml" }
+      - {cmd: "/home/phoenix/install_docker.sh" }
       delegate_to: localhost
