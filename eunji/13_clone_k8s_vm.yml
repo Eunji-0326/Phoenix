@@ -5,16 +5,16 @@
   vars_files: ./vars.yml
 
   tasks: 
-  - name: Set the state of a virtual machine to poweroff
-    community.vmware.vmware_guest_powerstate:
-      hostname: '{{ my_vcenter_hostname }}'
-      username: '{{ my_vcenter_username }}'
-      password: '{{ my_vcenter_password }}'
-      validate_certs: false
-      name: "k8s-master"
-      state: powered-off
-    delegate_to: localhost
-    register: deploy
+  # - name: Set the state of a virtual machine to poweroff
+  #   community.vmware.vmware_guest_powerstate:
+  #     hostname: '{{ my_vcenter_hostname }}'
+  #     username: '{{ my_vcenter_username }}'
+  #     password: '{{ my_vcenter_password }}'
+  #     validate_certs: false
+  #     name: "k8s-master"
+  #     state: powered-off
+  #   delegate_to: localhost
+  #   register: deploy
 
   - name: Instant Clone a VM with guest_customization
     community.vmware.vmware_guest_instant_clone:
