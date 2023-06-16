@@ -7,9 +7,10 @@ VMware1!
 EOF
 echo "Root password changed successfully."
 
+su - << EOF
 # set IP address
-network_config=$(cat <<EOL
-network:
+echo <<EOL
+"network:
  version: 2
  renderer: NetworkManager
  ethernets:
@@ -19,13 +20,12 @@ network:
     - 10.10.13.2/24
    gateway4: 10.10.13.1
    nameservers:
-    addresses: [203.248.252.2, 10.10.10.2]
-EOL
-)
-echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml
-sudo netplan apply
+    addresses: [203.248.252.2, 10.10.10.2]" 
+EOL > /home/phoenix/set_network.yaml
 
-su - << EOF
+cat /home/phoenix/set_network.yaml > /etc/netplan/01-network-manager-all.yaml
+netplan apply
+
 # repository update
 # sudo systemctl stop unattended-upgrades.service
 apt update -y
