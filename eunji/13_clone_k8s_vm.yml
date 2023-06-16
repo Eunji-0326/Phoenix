@@ -16,7 +16,7 @@
       vm_password: "VMware1!"
       datastore: test-iscsi
       cluster: S11
-      #host: "sa-esxi-04.vclass.local"
+      host: "sa-esxi-04.vclass.local"
       guestinfo_vars:
         - hostname: '{{ item.hostname }}'
           ipaddress: "{{ item.addr }}"
