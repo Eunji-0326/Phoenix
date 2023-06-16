@@ -17,13 +17,13 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         copy:
-            src: "/mnt/c/test/Phoenix/eunji/set_k8s_worker.sh"
+            src: '{{ item.src }}'
             dest: "/home/phoenix/net_set.sh"
             overwrite: true
       with_items:
-      - {vm: "k8s-worker-01" }
-      - {vm: "k8s-worker-02" }
-      - {vm: "k8s-worker-03" }
+      - {vm: "k8s-worker-01", src: "/mnt/c/test/Phoenix/eunji/set_k8s_worker_01.sh" }
+      - {vm: "k8s-worker-02", src: "/mnt/c/test/Phoenix/eunji/set_k8s_worker_02.sh" }
+      - {vm: "k8s-worker-03", src: "/mnt/c/test/Phoenix/eunji/set_k8s_worker_03.sh" }
       delegate_to: localhost
 
     - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
@@ -105,3 +105,19 @@
       - {vm: "k8s-worker-02" }
       - {vm: "k8s-worker-03" }
       delegate_to: localhost
+
+    - name: Set the state of a virtual machine to reboot
+      community.vmware.vmware_guest_powerstate:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        datacenter: TEST
+        name: '{{ item.vm }}'
+        state: reboot-guest
+      with_items:
+      - {vm: "k8s-worker-01" }
+      - {vm: "k8s-worker-02" }
+      - {vm: "k8s-worker-03" }
+      delegate_to: localhost
+      register: deploy
