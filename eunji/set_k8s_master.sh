@@ -8,22 +8,7 @@ EOF
 echo "Root password changed successfully."
 
 su - << EOF
-# set IP address
-echo <<EOL
-"network:
- version: 2
- renderer: NetworkManager
- ethernets:
-  ens192:
-   dhcp4: no
-   addresses:
-    - 10.10.13.2/24
-   gateway4: 10.10.13.1
-   nameservers:
-    addresses: [203.248.252.2, 10.10.10.2]" 
-EOL > /home/phoenix/set_network.yaml
-
-cat /home/phoenix/set_network.yaml > /etc/netplan/01-network-manager-all.yaml
+cat /home/phoenix/set_net.yml > /etc/netplan/01-network-manager-all.yaml
 netplan apply
 
 # repository update
