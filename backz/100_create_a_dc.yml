@@ -32,6 +32,7 @@
           num_cpus: 2
         networks:
         - name: "{{ student_ID + '-Mgmt' }}"  # PHX-Mgmt 포트 그룹에 연결
+          type: static
           ip: 20.20.20.22
           netmask: 255.255.255.0
           gateway: 20.20.20.1
