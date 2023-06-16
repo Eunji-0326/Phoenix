@@ -6,7 +6,7 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 echo "ahneunji" | docker login --username ahneunji --password "P@ssw0rd^^"
 
 # 쿠버네티스에서 사용할 인증정보(secret) 생성
-kubectl create secret generic hayeon-secret-test --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
+kubectl create secret generic phoenix-secret --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
 # calico CNI install
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
