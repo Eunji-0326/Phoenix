@@ -20,8 +20,6 @@
             src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
             dest: "/home/phoenix/setting.sh"
             overwrite: true
-        wait_for_process: True
-        timeout: 60
       delegate_to: localhost
 
     - name: Execute shell script on ESXi host
