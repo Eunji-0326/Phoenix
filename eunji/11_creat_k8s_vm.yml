@@ -24,9 +24,17 @@
         hardware:
           memory_mb: 4096
           num_cpus: 2
+          hotadd_memory: true
+          hotadd_cpu: true
         networks:
-        - name: "dpg_prod"  # PHX-Mgmt 포트 그룹에 연결
+        - name: "dpg_prod"
+          type: static
+          ip: 10.10.13.2
+          netmask: 255.255.255.0 
+          gateway: 10.10.13.1
+          dns_servers: 10.10.10.2
           device_type: vmxnet3
+          start_connected: true
         cdrom:
         - controller_number: 0
           unit_number: 0
