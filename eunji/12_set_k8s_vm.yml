@@ -81,5 +81,5 @@
       - {cmd: "-rf /home/phoenix/setting.sh" }
       - {cmd: "-rf /home/phoenix/set_net.yml" }
       - {cmd: "-rf /home/phoenix/install_docker.sh" }
-      - {cmd: "/home/phoenix/install_k8s.sh" }
+      - {cmd: "-rf /home/phoenix/install_k8s.sh" }
       delegate_to: localhost
