@@ -26,8 +26,8 @@ apt install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
 
 # daemon restart
-sudo systemctl daemon-reload
-sudo systemctl restart kubelet
+systemctl daemon-reload
+systemctl restart kubelet
 
 # docker directory create
 mkdir /etc/docker
@@ -50,3 +50,7 @@ systemctl restart docker
 # kubelet startm enable
 systemctl start kubelet
 systemctl enable kubelet
+
+# containerd setting and restart
+sed -i '/"cri"/ s/^/#/' /etc/containerd/config.toml
+systemctl restart containerd

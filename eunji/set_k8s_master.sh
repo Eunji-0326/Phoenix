@@ -1,45 +1,18 @@
-#!/usr/bin/bash
+# k8s init
+kubeadm init --pod-network-cidr=192.168.0.0/16
+export KUBECONFIG=/etc/kubernetes/admin.conf
 
-# set root password
-sudo passwd root <<EOF
-VMware1!
-VMware1!
-EOF
-echo "Root password changed successfully."
+# docker 로그인
+echo "hayeon2401" | docker login --username hayeon2401 --password "corona1357@"
 
-su - << EOF
-VMware1!
-cat /home/phoenix/set_net.yml > /etc/netplan/01-network-manager-all.yaml
-netplan apply
+# 쿠버네티스에서 사용할 인증정보(secret) 생성
+kubectl create secret generic hayeon-secret-test --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
-# repository update
-# sudo systemctl stop unattended-upgrades.service
-apt update -y
+# calico CNI 설치
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 
-# ssh server install
-apt install -y openssh-server
+# 커스텀 리소스를 클러스터에 생성
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
 
-# ifconfig command install
-apt install net-tools
-
-# package install
-apt install -y ca-certificates curl gnupg lsb-release
-
-# vim package install
-apt install -y vim
-
-# iptables install
-echo 'iptables-persistent iptables-persistent/autosave_v4 boolean true' | sudo debconf-set-selections
-echo 'iptables-persistent iptables-persistent/autosave_v6 boolean false' | sudo debconf-set-selections
-apt install -y iptables-persistent
-
-# add hosts file 
-echo "10.10.13.2 k8s-master" >> /etc/hosts
-echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
-echo "10.10.13.4 k8s-worker-02" >> /etc/hosts
-echo "10.10.13.5 k8s-worker-03" >> /etc/hosts
-echo "10.10.13.6 k8s-worker-04" >> /etc/hosts
-
-# set korean
-gsettings set org.gnome.desktop.input-sources sources "[('ibus', 'hangul')]"
-EOF
+# weavenet CNI 설치
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
