@@ -3,12 +3,12 @@ kubeadm init --pod-network-cidr=192.168.0.0/16
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 # docker 로그인
-echo "hayeon2401" | docker login --username hayeon2401 --password "corona1357@"
+echo "ahneunji" | docker login --username ahneunji --password "P@ssw0rd^^"
 
 # 쿠버네티스에서 사용할 인증정보(secret) 생성
 kubectl create secret generic hayeon-secret-test --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
-# calico CNI 설치
+# calico CNI install
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 
 # 커스텀 리소스를 클러스터에 생성
