@@ -20,12 +20,31 @@
             src: '{{ item.src }}'
             dest: '{{ item.dst }}'
             overwrite: true
-        with_items:
-        - {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
-        - {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh", dst: "/home/phoenix/setting.sh" }
-        - {src: "/mnt/c/test/Phoenix/eunji/install_docker.sh", dst: "/home/phoenix/install_docker.sh" }
+      with_items:
+      - {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
+      - {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh", dst: "/home/phoenix/setting.sh" }
+      - {src: "/mnt/c/test/Phoenix/eunji/install_docker.sh", dst: "/home/phoenix/install_docker.sh" }
       delegate_to: localhost
 
+    # - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    #   community.vmware.vmware_guest_file_operation:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master"
+    #     vm_id_type: vm_name
+    #     vm_username: 'phoenix'
+    #     vm_password: 'VMware1!'
+    #     copy:
+    #         src: '{{ item.src }}'
+    #         dest: '{{ item.dst }}'
+    #         overwrite: true
+    #     with_items:
+    #     - {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
+    #     - {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh", dst: "/home/phoenix/setting.sh" }
+    #     - {src: "/mnt/c/test/Phoenix/eunji/install_docker.sh", dst: "/home/phoenix/install_docker.sh" }
+    #   delegate_to: localhost
     - name: Execute shell script on ESXi host
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
