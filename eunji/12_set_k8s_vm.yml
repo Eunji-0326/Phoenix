@@ -39,17 +39,17 @@
         timeout: 120
       delegate_to: localhost
 
-    - name: Delete copied shell script #실행한 shell script 삭제
-      community.vmware.vmware_vm_shell:
-        hostname: '{{ my_vcenter_hostname }}'
-        username: '{{ my_vcenter_username }}'
-        password: '{{ my_vcenter_password }}'
-        validate_certs: 'false'
-        vm_id: "k8s-master"
-        vm_id_type: vm_name
-        vm_username: 'root'
-        vm_password: 'VMware1!'
-        vm_shell: /usr/bin/rm
-        vm_shell_args: -rf /home/phoenix/setting.sh
-        wait_for_process: True
-      delegate_to: localhost
+    # - name: Delete copied shell script #실행한 shell script 삭제
+    #   community.vmware.vmware_vm_shell:
+    #     hostname: '{{ my_vcenter_hostname }}'
+    #     username: '{{ my_vcenter_username }}'
+    #     password: '{{ my_vcenter_password }}'
+    #     validate_certs: 'false'
+    #     vm_id: "k8s-master"
+    #     vm_id_type: vm_name
+    #     vm_username: 'root'
+    #     vm_password: 'VMware1!'
+    #     vm_shell: /usr/bin/rm
+    #     vm_shell_args: -rf /home/phoenix/setting.sh
+    #     wait_for_process: True
+    #   delegate_to: localhost
