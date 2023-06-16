@@ -30,7 +30,7 @@
         validate_certs: 'false'
         vm_id: "k8s-master"
         vm_id_type: vm_name
-        vm_username: 'root'
+        vm_username: 'phoenix'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/bash
         vm_shell_args: 
@@ -53,7 +53,7 @@
         vm_shell_args: -rf /home/phoenix/setting.sh
         wait_for_process: True
       delegate_to: localhost
-      
+
     - name: reboot vm
       community.vmware.vmware_guest_powerstate:
         hostname: '{{ my_vcenter_hostname }}'
