@@ -7,8 +7,6 @@ VMware1!
 EOF
 echo "Root password changed successfully."
 
-su - << EOF
-VMware1!
 # set IP address
 network_config=$(cat <<EOL
 network:
@@ -27,6 +25,7 @@ EOL
 echo "$network_config" | tee /etc/netplan/01-network-manager-all.yaml
 netplan apply
 
+su - << EOF
 # repository update
 # sudo systemctl stop unattended-upgrades.service
 apt update -y
