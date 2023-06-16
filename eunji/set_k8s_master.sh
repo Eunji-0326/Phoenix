@@ -19,7 +19,7 @@ network:
     - 10.10.13.2/24
    gateway4: 10.10.13.1
    nameservers:
-    addresses: [10.10.10.2, 203.248.252.2]
+    addresses: [203.248.252.2, 10.10.10.2]
 EOL
 )
 echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /dev/null
