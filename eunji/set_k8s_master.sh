@@ -1,4 +1,4 @@
-#/bin/bash!
+#!/usr/bin/bash
 
 # set root password
 sudo passwd root <<EOF
@@ -7,6 +7,8 @@ VMware1!
 EOF
 echo "Root password changed successfully."
 
+su - << EOF
+VMware1!
 # set IP address
 network_config=$(cat <<EOL
 network:
@@ -55,3 +57,4 @@ sudo echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
 sudo echo "10.10.13.4 k8s-worker-02" >> /etc/hosts
 sudo echo "10.10.13.5 k8s-worker-03" >> /etc/hosts
 sudo echo "10.10.13.6 k8s-worker-04" >> /etc/hosts
+EOF
