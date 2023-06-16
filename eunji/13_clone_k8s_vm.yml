@@ -15,6 +15,7 @@
       vm_username: "root"
       vm_password: "VMware1!"
       datastore: test-iscsi
+      host: "sa-esxi-04.vclass.local"
       guestinfo_vars:
         - hostname: '{{ item.hostname }}'
           ipaddress: "{{ item.addr }}"
