@@ -61,5 +61,5 @@
       with_items:
       - {cmd: "-rf /home/phoenix/setting.sh" }
       - {cmd: "-rf /home/phoenix/set_net.yml" }
-      - {cmd: "/home/phoenix/install_docker.sh" }
+      - {cmd: "-rf /home/phoenix/install_docker.sh" }
       delegate_to: localhost
