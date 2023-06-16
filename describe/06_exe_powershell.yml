@@ -21,7 +21,6 @@
             overwrite: true
       delegate_to: localhost
 
-
     - name: Run dns powershell script
       community.vmware.vmware_vm_shell:
         hostname: '{{ vcenter_hostname }}'
