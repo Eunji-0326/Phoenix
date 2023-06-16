@@ -24,7 +24,7 @@ network:
     addresses: [203.248.252.2, 10.10.10.2]
 EOL
 )
-echo "$network_config" | sudo tee /etc/netplan/01-network-manager-all.yaml > /dev/null
+echo "$network_config" | tee /etc/netplan/01-network-manager-all.yaml
 netplan apply
 
 # repository update
