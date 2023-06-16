@@ -1,5 +1,7 @@
 # swap disable
 swapoff -a
+free -m
+sed -i '/swap/s/^/#/' /etc/fstab
 
 # firewall disable
 ufw disable
