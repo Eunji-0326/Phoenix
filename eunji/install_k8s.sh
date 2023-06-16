@@ -1,6 +1,5 @@
 # swap disable
 sudo swapoff -a
-VMware1!
 
 # firewall disable
 sudo ufw disable
