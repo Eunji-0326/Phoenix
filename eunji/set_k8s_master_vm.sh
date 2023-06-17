@@ -1,12 +1,5 @@
 #!/usr/bin/bash
 
-# set root password
-sudo passwd root <<EOF
-VMware1!
-VMware1!
-EOF
-echo "Root password changed successfully."
-
 su - << EOF
 VMware1!
 cat /home/phoenix/set_net.yml > /etc/netplan/01-network-manager-all.yaml
