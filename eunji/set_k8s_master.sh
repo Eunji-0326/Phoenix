@@ -1,4 +1,4 @@
-#export KUBECONFIG="/etc/kubernetes/admin.conf"
+echo "KUBECONFIG="/etc/kubernetes/admin.conf"" >> /etc/environment
 
 # k8s init
 kubeadm init --pod-network-cidr=192.168.0.0/16
