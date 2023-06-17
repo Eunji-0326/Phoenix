@@ -26,7 +26,7 @@
       - {vm: "k8s-worker-03", src: "/mnt/c/test/Phoenix/eunji/set_k8s_worker_03.sh" }
       delegate_to: localhost
 
-    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    - name: Copy shell script to VM
       community.vmware.vmware_guest_file_operation:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'
@@ -46,7 +46,7 @@
       - {vm: "k8s-worker-03", src: "/mnt/c/test/Phoenix/eunji/set_net_k8s_03.yml"}
       delegate_to: localhost
 
-    - name: Execute shell script on ESXi host
+    - name: Execute shell script on k8s_worker
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'

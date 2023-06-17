@@ -45,7 +45,7 @@
         timeout: 300
       delegate_to: localhost
 
-    - name: Execute shell script on ESXi host
+    - name: Execute shell script on k8s_master
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'
