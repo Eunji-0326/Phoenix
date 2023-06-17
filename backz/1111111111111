@@ -1,0 +1,2 @@
+esxcli network ip interface ipv4 set -i vmk0 -I 20.20.20.11 -N 255.255.255.0
+esxcli network ip route ipv4 add -g 20.20.20.1 -n 0.0.0.0/0
