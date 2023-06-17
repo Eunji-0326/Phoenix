@@ -6,7 +6,7 @@
   vars_files: ./vars.yml
 
   tasks: 
-    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    - name: Copy shell script to VM
       community.vmware.vmware_guest_file_operation:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'
@@ -38,7 +38,7 @@
         timeout: 120
       delegate_to: localhost
 
-    - name: Delete copied shell script #실행한 shell script 삭제
+    - name: Delete copied shell script
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'

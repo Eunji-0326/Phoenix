@@ -36,9 +36,9 @@ echo "$sha256_hash" >> /home/phoenix/token/token.txt
 apt install -y expect
 
 expect << EOF
-spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt test01@10.10.13.3:/home/phoenix/token/token.txt
-spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt test01@10.10.13.4:/home/phoenix/token/token.txt
-spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt test01@10.10.13.5:/home/phoenix/token/token.txt
+spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.3:/home/phoenix/token/token.txt
+spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.4:/home/phoenix/token/token.txt
+spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.5:/home/phoenix/token/token.txt
 
 expect "password:" {send "VMware1!\r"}
 expect eof
