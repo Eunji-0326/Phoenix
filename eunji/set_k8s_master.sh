@@ -1,4 +1,4 @@
-#export KUBECONFIG="/etc/kubernetes/admin.conf"
+#export KUBECONFIG="/etc/kubernetes/admin.conf"는 15.yml 돌리기 전에 마스터에서 작업해주기
 
 # k8s init
 kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -37,9 +37,14 @@ apt install -y expect
 
 expect << EOF
 spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.3:/home/phoenix/token.txt
-spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.4:/home/phoenix/token.txt
-spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.5:/home/phoenix/token.txt
+expect "password:" {send "VMware1!\r"}
+expect eof
 
+spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.4:/home/phoenix/token.txt
+expect "password:" {send "VMware1!\r"}
+expect eof
+
+spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.5:/home/phoenix/token.txt
 expect "password:" {send "VMware1!\r"}
 expect eof
 EOF
