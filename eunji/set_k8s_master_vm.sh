@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-su - << EOF
-VMware1!
 cat /home/phoenix/set_net.yml > /etc/netplan/01-network-manager-all.yaml
 netplan apply
 
@@ -34,4 +32,3 @@ echo "10.10.13.5 k8s-worker-03" >> /etc/hosts
 
 # set korean
 gsettings set org.gnome.desktop.input-sources sources "[('ibus', 'hangul')]"
-EOF
