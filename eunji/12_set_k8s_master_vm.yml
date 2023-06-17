@@ -35,10 +35,10 @@
         validate_certs: 'false'
         vm_id: "k8s-master"
         vm_id_type: vm_name
-        vm_username: 'phoenix'
+        vm_username: 'root'
         vm_password: 'VMware1!'
-        vm_shell: /usr/bin/sudo
-        vm_shell_args: "sh /home/phoenix/setting.sh \ VMWare1!"
+        vm_shell: /usr/bin/bash
+        vm_shell_args: "/home/phoenix/setting.sh"
         wait_for_process: True
         timeout: 120
       delegate_to: localhost
