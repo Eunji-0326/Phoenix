@@ -35,7 +35,7 @@
         vm_shell: /usr/bin/bash
         vm_shell_args: "/home/phoenix/set_k8s.sh"
         wait_for_process: True
-        timeout: 120
+        timeout: 300
       delegate_to: localhost
 
     - name: Delete copied shell script
