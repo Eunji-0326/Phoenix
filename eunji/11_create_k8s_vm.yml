@@ -23,7 +23,7 @@
           datastore: test-iscsi
         hardware:
           memory_mb: 4096
-          num_cpus: 3
+          num_cpus: 2
           hotadd_memory: true
           hotadd_cpu: true
         networks:
