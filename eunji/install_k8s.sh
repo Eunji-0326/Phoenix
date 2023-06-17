@@ -6,6 +6,8 @@ sed -i '/swap/s/^/#/' /etc/fstab
 # firewall disable
 ufw disable
 
+apt -y update
+
 # lock prevent
 rm -rf /var/lib/dpkg/lock-frontend
 rm -rf /var/lib/dpkg/lock
@@ -20,6 +22,8 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # Kubernetes package store add
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+
+apt -y update
 
 # k8s command install
 apt install -y kubelet kubeadm kubectl
