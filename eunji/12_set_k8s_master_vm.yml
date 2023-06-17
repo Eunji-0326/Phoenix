@@ -40,11 +40,26 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/bash
+        vm_shell_args: "/home/phoenix/setting.sh"
+        wait_for_process: True
+        timeout: 300
+      delegate_to: localhost
+
+    - name: Execute shell script on ESXi host
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "k8s-master"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /usr/bin/bash
         vm_shell_args: '{{ item.cmd }}'
         wait_for_process: True
         timeout: 120
       with_items:
-      - {cmd: "/home/phoenix/setting.sh" }
       - {cmd: "/home/phoenix/install_docker.sh" }
       - {cmd: "/home/phoenix/install_k8s.sh" }
       delegate_to: localhost
