@@ -16,12 +16,19 @@
       vm_password: "VMware1!"
       datastore: test-iscsi
       host: '{{ item.host }}'
+      guestinfo_vars:
+        - hostname: '{{ item.hostname }}'
+          ipaddress: "{{ item.addr }}"
+          netmask: 255.255.255.0
+          gateway: 10.10.13.1
+          dns: 10.10.10.2
+          domain: "{{ item.domain }}"
       name: '{{ item.name }}'
       parent_vm: "k8s-master"
       wait_vm_tools: true
     with_items:
-    - {host: "sa-esxi-04.vclass.local", name: "k8s-worker-01" }
-    - {host: "sa-esxi-05.vclass.local", name: "k8s-worker-02" }
-    - {host: "sa-esxi-06.vclass.local", name: "k8s-worker-03" }
+    - {hostname: "k8s-worker-01",host: "sa-esxi-04.vclass.local", addr: "10.10.13.3",name: "k8s-worker-01",domain: "k8s-worker-01"}
+    - {hostname: "k8s-worker-02",host: "sa-esxi-05.vclass.local", addr: "10.10.13.4",name: "k8s-worker-02",domain: "k8s-worker-02" }
+    - {hostname: "k8s-worker-03",host: "sa-esxi-06.vclass.local", addr: "10.10.13.5",name: "k8s-worker-03",domain: "k8s-worker-03" }
     register: Instant_cloned_guest_customize
     delegate_to: localhost
