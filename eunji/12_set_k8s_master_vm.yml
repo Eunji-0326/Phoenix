@@ -24,7 +24,7 @@
             overwrite: true
       with_items:
       #- {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
-      #- {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master_vm.sh", dst: "/home/phoenix/setting.sh" }
+      - {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master_vm.sh", dst: "/home/phoenix/setting.sh" }
       - {src: "/mnt/c/test/Phoenix/eunji/install_docker.sh", dst: "/home/phoenix/install_docker.sh" }
       - {src: "/mnt/c/test/Phoenix/eunji/install_k8s.sh", dst: "/home/phoenix/install_k8s.sh" }
       delegate_to: localhost
@@ -44,7 +44,7 @@
         wait_for_process: True
         timeout: 120
       with_items:
-      #- {cmd: "/home/phoenix/setting.sh" }
+      - {cmd: "/home/phoenix/setting.sh" }
       - {cmd: "/home/phoenix/install_docker.sh" }
       - {cmd: "/home/phoenix/install_k8s.sh" }
       delegate_to: localhost
