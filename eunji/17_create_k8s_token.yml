@@ -17,8 +17,8 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         copy:
-            src: "/mnt/c/test/Phoenix/eunji/set_k8s_master.sh"
-            dest: "/home/phoenix/set_k8s.sh"
+            src: "/mnt/c/test/Phoenix/eunji/create_k8s_token.sh"
+            dest: "/home/phoenix/create_token.sh"
             overwrite: true
       delegate_to: localhost
 
@@ -33,7 +33,7 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/bash
-        vm_shell_args: "/home/phoenix/set_k8s.sh"
+        vm_shell_args: "/home/phoenix/create_token.sh"
         wait_for_process: True
         timeout: 300
       delegate_to: localhost
@@ -49,6 +49,6 @@
         vm_username: 'root'
         vm_password: 'VMware1!'
         vm_shell: /usr/bin/rm
-        vm_shell_args: "-rf /home/phoenix/set_k8s.sh"
+        vm_shell_args: "-rf /home/phoenix/create_token.sh"
         wait_for_process: True
       delegate_to: localhost
