@@ -9,7 +9,6 @@ echo "$sha256_hash" >> /home/phoenix/token/token.txt
 
 
 # 토큰을 worker로 복사
-apt install -y expect
 
 expect << EOF
 spawn scp -o "StrictHostKeyChecking=no" /home/phoenix/token/token.txt phoenix@10.10.13.3:/home/phoenix/token.txt
