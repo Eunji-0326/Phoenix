@@ -25,6 +25,7 @@ echo 'iptables-persistent iptables-persistent/autosave_v6 boolean false' | sudo 
 apt install -y iptables-persistent
 
 # add hosts file 
+echo "127.0.0.1 k8s-master" > /etc/hosts
 echo "10.10.13.2 k8s-master" >> /etc/hosts
 echo "10.10.13.3 k8s-worker-01" >> /etc/hosts
 echo "10.10.13.4 k8s-worker-02" >> /etc/hosts

@@ -15,9 +15,6 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 # 커스텀 리소스를 클러스터에 생성
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
 
-# weavenet CNI 설치
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
-
 # 토큰 디렉터리 생성
 mkdir -p /home/phoenix/token
 
