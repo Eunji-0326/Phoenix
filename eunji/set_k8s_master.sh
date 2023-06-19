@@ -25,7 +25,7 @@ echo $(kubeadm token list | awk 'NR==2{print $1}') > /home/phoenix/token/token.t
 # echo "$token" 
 
 # CA 인증서를 사용하여 퍼블릭 키의 SHA256 해시 생성
-echo sha256_hash=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //') >> /home/phoenix/token/token.txt
+echo $(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //') >> /home/phoenix/token/token.txt
 
 
 # 토큰을 worker로 복사
