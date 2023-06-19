@@ -19,7 +19,8 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 mkdir -p /home/phoenix/token
 
 # 토큰 목록에서 원하는 토큰 추출한 토큰을 토큰 파일에 작성
-echo $(kubeadm token list | awk 'NR==2{print $1}') > /home/phoenix/token/token.txt
+touch /home/phoenix/token/token.txt
+echo $(kubeadm token list | awk 'NR==2{print $1}') >> /home/phoenix/token/token.txt
 
 # # 
 # echo "$token" 
