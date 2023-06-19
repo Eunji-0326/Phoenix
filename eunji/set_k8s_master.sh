@@ -26,7 +26,7 @@ echo "$token" > /home/phoenix/token/token.txt
 
 # CA 인증서를 사용하여 퍼블릭 키의 SHA256 해시 생성
 sha256_hash=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
-echo "$sha256_hash" >> /home/phoenix/token/token.txt
+#echo "$sha256_hash" >> /home/phoenix/token/token.txt
 
 
 # 토큰을 worker로 복사
