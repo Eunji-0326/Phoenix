@@ -18,15 +18,14 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0
 # 토큰 디렉터리 생성
 mkdir -p /home/phoenix/token
 
-# 토큰 목록에서 원하는 토큰 추출
-token=$(kubeadm token list | awk 'NR==2{print $1}')
+# 토큰 목록에서 원하는 토큰 추출한 토큰을 토큰 파일에 작성
+echo $(kubeadm token list | awk 'NR==2{print $1}') > /home/phoenix/token/token.txt
 
-# 추출한 토큰을 토큰 파일에 작성
-echo "$token" > /home/phoenix/token/token.txt
+# # 
+# echo "$token" 
 
 # CA 인증서를 사용하여 퍼블릭 키의 SHA256 해시 생성
-sha256_hash=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
-#echo "$sha256_hash" >> /home/phoenix/token/token.txt
+echo sha256_hash=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //') >> /home/phoenix/token/token.txt
 
 
 # 토큰을 worker로 복사
