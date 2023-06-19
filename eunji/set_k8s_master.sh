@@ -22,9 +22,6 @@ mkdir -p /home/phoenix/token
 touch /home/phoenix/token/token.txt
 echo $(kubeadm token list | awk 'NR==2{print $1}') >> /home/phoenix/token/token.txt
 
-# # 
-# echo "$token" 
-
 # CA 인증서를 사용하여 퍼블릭 키의 SHA256 해시 생성
 echo $(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //') >> /home/phoenix/token/token.txt
 
