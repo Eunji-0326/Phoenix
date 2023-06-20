@@ -9,7 +9,8 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt update
 
 # docker package install
-apt install docker-ce docker-ce-cli containerd.io -y
+#apt install docker-ce docker-ce-cli containerd.io -y
+apt install -y docker-* containerd.io
 
 # docker daemon start and enable
 systemctl enable docker
