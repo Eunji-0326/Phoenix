@@ -8,7 +8,7 @@
   vars_files: ./vars.yml
 
   tasks: 
-    - name: Copy shell script to VM # 가상 머신에 shell script를 복사, task로 하나씩 등록하기
+    - name: Copy shell script to VM
       community.vmware.vmware_guest_file_operation:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'
@@ -23,7 +23,7 @@
             dest: '{{ item.dst }}'
             overwrite: true
       with_items:
-      #- {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
+      - {src: "/mnt/c/test/Phoenix/eunji/set_net_k8s.yml", dst: "/home/phoenix/set_net.yml" }
       - {src: "/mnt/c/test/Phoenix/eunji/set_k8s_master_vm.sh", dst: "/home/phoenix/setting.sh" }
       - {src: "/mnt/c/test/Phoenix/eunji/install_docker.sh", dst: "/home/phoenix/install_docker.sh" }
       - {src: "/mnt/c/test/Phoenix/eunji/install_k8s.sh", dst: "/home/phoenix/install_k8s.sh" }
@@ -64,7 +64,7 @@
       - {cmd: "/home/phoenix/install_k8s.sh" }
       delegate_to: localhost
 
-    - name: Delete copied shell script #실행한 shell script 삭제
+    - name: Delete copied shell script
       community.vmware.vmware_vm_shell:
         hostname: '{{ my_vcenter_hostname }}'
         username: '{{ my_vcenter_username }}'
