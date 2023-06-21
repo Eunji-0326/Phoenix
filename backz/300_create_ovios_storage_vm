@@ -51,7 +51,7 @@
           type: thin
           datastore: '{{ datastore_name }}'          
         networks:
-        - name: "{{ student_ID + '-SA-Storage' }}"
+        - name: "{{ student_ID + '-Storage' }}"
           device_type: vmxnet3
         cdrom:
         - controller_number: 0
