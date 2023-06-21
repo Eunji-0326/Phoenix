@@ -11,8 +11,6 @@ kubectl create secret generic phoenix-secret --from-file=.dockerconfigjson=/root
 
 # calico CNI install
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
-
-# 커스텀 리소스를 클러스터에 생성
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
 
 # 토큰 디렉터리 생성
