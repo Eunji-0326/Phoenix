@@ -24,18 +24,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
- name: svc3-ldapsrv
+ name: svc-ldapsrv
 spec:
+ selector:
+   app: ldapsrv
  ports:
    - name: ldapsrv-port1
      port: 389
      targetPort: 389
-     nodePort: 30389
      protocol: TCP
    - name: ldapsrv-port2
      port: 636
      targetPort: 636
-     nodePort: 30636
      protocol: TCP
- selector:
-   app: ldapsrv
+ 
