@@ -1,0 +1,6 @@
+FROM centos:7
+RUN yum -y update && yum -y install httpd && yum -y install php
+RUN yum -y install net-tools && yum -y install vim
+RUN yum -y install slapd-clients
+EXPOSE 80
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]

@@ -14,7 +14,7 @@ spec:
    spec:
      containers:
      - name: pod-ldapsrv
-       image: ahneunji/ldap-server:2.0
+       image: ahneunji/ldap-server:3.0
        ports:
        - containerPort: 389
          protocol: TCP

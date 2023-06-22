@@ -14,7 +14,7 @@ spec:
    spec:
     containers:
     - name: pod-websrv
-      image: ahneunji/web-server:1.0
+      image: ahneunji/web-server:2.0
       ports:
       - containerPort: 80
       volumeMounts:
