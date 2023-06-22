@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: deploy-websrv
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+     app: websrv
+ template:
+   metadata:
+     labels:
+       app: websrv
+   spec:
+     containers:
+     - name: pod-websrv
+       image: ahneunji/web-server:1.0
+       ports:
+       - containerPort: 80
+       volumeMounts:
+       - name: myvol
+         mountPath: /var/www/html
+    volumes:
+    - name: myvol
+      persistentVolumeClaim:
+       claimName: test-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: svc-websrv
+spec:
+ ports:
+   - name: web-port
+     port: 80
+     targetPort: 80
+     protocol: TCP
+     nodePort: 30000
+ selector:
+   app: websrv
+ type: NodePort
