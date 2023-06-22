@@ -13,15 +13,15 @@ rm -rf /var/lib/dpkg/lock-frontend
 rm -rf /var/lib/dpkg/lock
 
 # set network
-echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.d/k8s.conf
-echo "tee /etc/sysctl.d/k8s.conf" >> /etc/modules-load.d/modules.conf
+echo "net.bridge.bridge-nf-call-iptables = 1" > /etc/sysctl.d/k8s.conf
+echo "tee /etc/sysctl.d/k8s.conf" > /etc/modules-load.d/modules.conf
 echo "br netfilter" >> /etc/modules-load.d/modules.conf
 
 # Kubernetes public GPG key add
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # Kubernetes package store add
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list
 
 apt -y update
 
