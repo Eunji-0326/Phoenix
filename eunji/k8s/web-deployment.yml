@@ -12,14 +12,14 @@ spec:
      labels:
        app: websrv
    spec:
-     containers:
-     - name: pod-websrv
-       image: ahneunji/web-server:1.0
-       ports:
-       - containerPort: 80
-       volumeMounts:
-       - name: myvol
-         mountPath: /var/www/html
+    containers:
+    - name: pod-websrv
+      image: ahneunji/web-server:1.0
+      ports:
+      - containerPort: 80
+      volumeMounts:
+      - name: myvol
+        mountPath: /var/www/html
     volumes:
     - name: myvol
       persistentVolumeClaim:
