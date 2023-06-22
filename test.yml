@@ -1,0 +1,14 @@
+apiVersion: v1 #api 버전
+kind: Pod # 종류
+metadata: #이름 및 라벨 정의
+  name: web-first # 외부에서 pod를 부를 이름
+	labels:
+   app: nginx
+spec: # 세부 서술, pod 구성요소 서술
+ containers:
+ - name: nginx  # 컨테이너 이름
+   image: nginx:latest # 컨테이너 생성 시 참조할 이미지
+   ports: #컨테이너 포트 번호
+   - containerPort: 8090
+ imagePullSecrets: # 쿠버네티스에서 사용할 인증관련 정보, 이미지 pull할 때 계정 정보 저장
+ - name : eunji-secret-test # 도커 로그인 정보를 쿠버네티스 용으로 변환
