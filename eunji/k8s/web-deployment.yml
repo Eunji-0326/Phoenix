@@ -18,12 +18,13 @@ spec:
       ports:
       - containerPort: 80
       volumeMounts:
-      - name: myvol
+      - name: nfs-html
         mountPath: /var/www/html
     volumes:
-    - name: myvol
-      persistentVolumeClaim:
-       claimName: test-claim
+    - name: nfs-html
+      nfs:
+       server: 20.20.50.50
+       path: /
 ---
 apiVersion: v1
 kind: Service
