@@ -1,0 +1,32 @@
+# https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_instant_clone_module.html#ansible-collections-community-vmware-vmware-guest-instant-clone-module
+
+---
+- hosts: localhost
+  vars_files: ./vars.yml
+
+  tasks: 
+  - name: Instant Clone a VM with guest_customization
+    community.vmware.vmware_guest_instant_clone:
+      hostname: '{{ my_vcenter_hostname }}'
+      username: '{{ my_vcenter_username }}'
+      password: '{{ my_vcenter_password }}'
+      validate_certs: false
+      datacenter: TEST
+      vm_username: "root"
+      vm_password: "VMware1!"
+      datastore: test-iscsi
+      host: '{{ item.host }}'
+      guestinfo_vars:
+        - hostname: '{{ item.hostname }}'
+          ipaddress: "{{ item.addr }}"
+          netmask: 255.255.255.0
+          gateway: 20.20.50.1
+          dns: 20.20.20.2
+          domain: "{{ item.domain }}"
+      name: '{{ item.name }}'
+      parent_vm: "k8s-master"
+      wait_vm_tools: true
+    with_items:
+    - {hostname: "phx-docker",host: "sa-esxi-04.vclass.local", addr: "20.20.50.50",name: "phx-docker",domain: "phx-docker"}
+    register: Instant_cloned_guest_customize
+    delegate_to: localhost

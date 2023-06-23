@@ -1,0 +1,73 @@
+## https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_guest_file_operation_module.html#ansible-collections-community-vmware-vmware-guest-file-operation-module 
+## https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vm_shell_module.html
+
+---
+- hosts: localhost
+  vars_files: ./vars.yml
+
+  tasks: 
+    - name: Copy shell script to VM
+      community.vmware.vmware_guest_file_operation:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "phx-docker"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        copy:
+            src: '{{ item.src }}'
+            dest: '{{ item.dst }}'
+            overwrite: true
+      with_items:
+      - {src: "/mnt/c/test/Phoenix/eunji/set_phx_docker.sh", dst: "/home/phoenix/net_set.sh" }
+      - {src: "/mnt/c/test/Phoenix/eunji/set_net_phx_docker.yml", dst: "/home/phoenix/set_net.yml" } 
+      delegate_to: localhost
+
+    - name: Execute shell script on k8s_worker
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "phx-docker"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /usr/bin/bash
+        vm_shell_args: "/home/phoenix/net_set.sh"
+        wait_for_process: True
+        timeout: 120
+      delegate_to: localhost
+
+    - name: Delete shell script on ESXi host
+      community.vmware.vmware_vm_shell:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        vm_id: "phx-docker"
+        vm_id_type: vm_name
+        vm_username: 'root'
+        vm_password: 'VMware1!'
+        vm_shell: /usr/bin/bash
+        vm_shell_args: '{{ item.cmd }}'
+        wait_for_process: True
+        timeout: 120
+      with_items:
+      - {cmd: "-rf /home/phoenix/net_set.sh" }
+      - {cmd: "-rf /home/phoenix/set_net.yml"} 
+      delegate_to: localhost
+
+    - name: Set the state of a virtual machine to reboot
+      community.vmware.vmware_guest_powerstate:
+        hostname: '{{ my_vcenter_hostname }}'
+        username: '{{ my_vcenter_username }}'
+        password: '{{ my_vcenter_password }}'
+        validate_certs: 'false'
+        datacenter: TEST
+        name: "phx-docker"
+        state: reboot-guest
+      delegate_to: localhost
+      register: deploy
