@@ -1,0 +1,42 @@
+# https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_cluster_ha_module.html#ansible-collections-community-vmware-vmware-cluster-ha-module
+
+
+# - name: Enable HA without admission control
+#   community.vmware.vmware_cluster_ha:
+#     hostname: '{{ my_vcenter_hostname }}'
+#       username: '{{ my_vcenter_username }}'
+#       password: '{{ my_vcenter_password }}'
+#       validate_certs: no
+#       datacenter: TEST
+#       cluster_name: S11
+#     enable: true
+#   delegate_to: localhost
+
+- name: Enable HA
+  community.vmware.vmware_cluster_ha:
+    hostname: '{{ my_vcenter_hostname }}'
+    username: '{{ my_vcenter_username }}'
+    password: '{{ my_vcenter_password }}'
+    validate_certs: no
+    datacenter: TEST
+    cluster_name: S11
+    enable: true
+    apd_response: restartConservative
+    pdl_response: restartAggressive
+  delegate_to: localhost
+
+# - name: Enable HA with admission control reserving 50% of resources for HA
+#   community.vmware.vmware_cluster_ha:
+#     hostname: '{{ my_vcenter_hostname }}'
+#     username: '{{ my_vcenter_username }}'
+#     password: '{{ my_vcenter_password }}'
+#     validate_certs: no
+#     datacenter: TEST
+#     cluster_name: S11
+#     enable: true
+#     reservation_based_admission_control:
+#       auto_compute_percentages: false
+#       failover_level: 1
+#       cpu_failover_resources_percent: 50
+#       memory_failover_resources_percent: 50
+#   delegate_to: localhost
