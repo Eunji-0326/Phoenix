@@ -14,17 +14,23 @@ spec:
    spec:
     containers:
     - name: pod-websrv
-      image: ahneunji/web-server:2.0
+      image: ahneunji/web-server:3.0
       ports:
       - containerPort: 80
       volumeMounts:
       - name: nfs-html
         mountPath: /var/www/html
+      - name: nfs-log
+        mountPath: /var/log/nginx
     volumes:
     - name: nfs-html
       nfs:
        server: 20.20.50.50
-       path: /
+       path: /html
+    - name: nfs-log
+      nfs:
+       server: 20.20.50.50
+       path: "/log"
 ---
 apiVersion: v1
 kind: Service
