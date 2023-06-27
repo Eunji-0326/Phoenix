@@ -1,0 +1,39 @@
+## https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vm_shell_module.html#ansible-collections-community-vmware-vmware-vm-shell-module
+
+---
+- hosts: localhost
+
+  vars_files: ./vars.yml
+
+  tasks: 
+    - name: VyOS Router Configuration 
+      community.vmware.vmware_vm_shell: 
+        hostname: '{{ vcenter_hostname }}' 
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: 'false' 
+        datacenter: '{{ datacenter_name }}' 
+        folder: '{{ folder_prefix + student_ID }}' 
+        vm_id: "{{ student_ID + '-Router' }}" 
+        vm_id_type: vm_name 
+        vm_username: 'vyos'
+        vm_password: 'vyos'
+        vm_shell: /bin/vbash 
+        vm_shell_cwd: "/tmp" 
+        vm_shell_args: |- 
+          -c "source /opt/vyatta/etc/functions/script-template
+          configure
+          
+          set interfaces ethernet eth0 address 200.200.200.156/24
+          commit
+
+          set nat destination rule 100 destination address 200.200.200.156
+          set nat destination rule 100 inbound-interface eth0
+          set nat destination rule 100 translation address 20.20.50.10
+
+          commit
+          save"
+        wait_for_process: True
+        timeout: 180
+      delegate_to: localhost
+      register: shell_command_with_wait_timeout
