@@ -52,6 +52,10 @@
           set interfaces ethernet eth1 vif 50 address 20.20.50.1/24
           set interfaces ethernet eth1 vif 50 ipv6 address no-default-link-local
 
+          set interfaces ethernet eth1 vif 14 description 'VLAN 14 - workload'
+          set interfaces ethernet eth1 vif 14 address 10.10.14.1/24
+          set interfaces ethernet eth1 vif 14 ipv6 address no-default-link-local
+
           set nat source rule 20 outbound-interface eth0
           set nat source rule 20 source address 20.20.20.0/24
           set nat source rule 20 translation address masquerade
@@ -59,6 +63,10 @@
           set nat source rule 50 outbound-interface eth0
           set nat source rule 50 source address 20.20.50.0/24
           set nat source rule 50 translation address masquerade
+
+          set nat source rule 14 outbound-interface eth0
+          set nat source rule 14 source address 10.10.14.0/24
+          set nat source rule 14 translation address masquerade
 
           commit
           save"

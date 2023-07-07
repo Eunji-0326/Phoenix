@@ -30,9 +30,9 @@
 
   - name: Add Hosts to dvSwitch
     community.vmware.vmware_dvs_host:
-      hostname: '{{ my_vcenter_hostname }}'
-      username: '{{ my_vcenter_username }}'
-      password: '{{ my_vcenter_password }}'
+      hostname: '{{ vcenter_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
       validate_certs: no
       esxi_hostname: '{{ item.hostname }}'
       switch_name: dvSwitch
@@ -41,12 +41,12 @@
           - vmnic3
       state: present
     with_items:
-    - {hostname: "{{ 'sa-esxi-04.vclass.local' }}" }
-    - {hostname: "{{ 'sa-esxi-05.vclass.local' }}" }
-    - {hostname: "{{ 'sa-esxi-06.vclass.local' }}" } 
+    - {hostname: "{{ '200.200.200.246' }}" }
+    - {hostname: "{{ '200.200.200.247' }}" }
+    - {hostname: "{{ '200.200.200.249' }}" } 
     delegate_to: localhost
 
-  - name: Adding vlan vsan portgroup to DSwtich
+  - name: Adding mgmt portgroup to DSwtich
     community.vmware.vmware_dvs_portgroup:
       hostname: '{{ my_vcenter_hostname }}'
       username: '{{ my_vcenter_username }}'
@@ -60,7 +60,7 @@
       state: present
     delegate_to: localhost
 
-  - name: Adding vlan iscsi portgroup to dvSwitch
+  - name: Adding workload portgroup to dvSwitch
     community.vmware.vmware_dvs_portgroup:
       hostname: '{{ my_vcenter_hostname }}'
       username: '{{ my_vcenter_username }}'
@@ -74,7 +74,7 @@
       state: present
     delegate_to: localhost
 
-  - name: Adding vlan vmotion portgroup to dvSwitch
+  - name: Adding  portgroup to dvSwitch
     community.vmware.vmware_dvs_portgroup:
       hostname: '{{ my_vcenter_hostname }}'
       username: '{{ my_vcenter_username }}'
